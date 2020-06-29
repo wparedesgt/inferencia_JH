@@ -40,7 +40,7 @@ library(swirl)
 
 #Continuando con el mismo ejemplo de dados. ¿Cuál de las siguientes expresiones representa P (A&B) / P (B), donde A es el evento de lanzar un 3 y B es el evento de que el lanzamiento sea impar?
 
-A#quí A es un subconjunto de B, por lo que la probabilidad de que A y B ocurran es la probabilidad de que A suceda. La probabilidad de B es el recíproco del número de números impares entre 1 y 6 (inclusive).
+#quí A es un subconjunto de B, por lo que la probabilidad de que A y B ocurran es la probabilidad de que A suceda. La probabilidad de B es el recíproco del número de números impares entre 1 y 6 (inclusive).
 
 
 #(1/6)/(1/2)

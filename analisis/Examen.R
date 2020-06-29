@@ -3,6 +3,7 @@
 
 
 
+
 Consider influenza epidemics for two parent heterosexual families. Suppose that the probability is 17% that at least one of the parents has contracted the disease. The probability that the father has contracted influenza is 12% while the probability that both the mother and father have contracted the disease is 6%. What is the probability that the mother has contracted influenza?
   
   (Hints look at lecture 2 around 5:30 and chapter 4 problem 4).
@@ -97,8 +98,6 @@ The median must be different from the mean.
 5.Pregunta 5
 Consider the following PMF shown below in R
 
-
-
 What is the mean?
 
 (Hint, watch Lecture 4 on expectations of PMFs.)
