@@ -19,6 +19,10 @@
 #11%
 
 
+#A=Mother, B = Father, P(A\cup B) = 17\%P(A∪B)=17%, P(B) = 12\%P(B)=12%, P(A\cap B) = 6\%P(A∩B)=6%. Since we know P(A\cup B) = P(A) + P(B) - P(A\cap B)P(A∪B)=P(A)+P(B)−P(A∩B) we get
+
+#17\% = P(A) + 12\% - 6\%17%=P(A)+12%−6%.
+
 #Pregunta No. 2
 
 #Una variable aleatoria, XX es uniforme, un cuadro de 0 a 1 de altura 1.
