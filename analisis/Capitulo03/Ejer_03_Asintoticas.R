@@ -21,8 +21,11 @@ library(swirl)
 
 #Para ver esto en acción, copiamos un código de las diapositivas y creamos la función coinPlot. Se necesita un número entero n, que es el número de lanzamientos de monedas que se simularán. Cuando coinPlot realiza estos lanzamientos de monedas, calcula la suma acumulativa (suponiendo que las caras sean 1 y las colas 0), pero después de cada lanzamiento divide la suma acumulativa por el número de lanzamientos realizados hasta el momento. Luego traza este valor para cada uno de los lanzamientos k = 1 ... n. Pruébelo ahora para n = 10.
 
+coinPlot(10)
 
 #Su salida depende del generador de números aleatorios de R, pero su trama probablemente salte un poco y, en el décimo giro, su suma acumulativa / 10 probablemente sea diferente de la mía. Si hicieras esto varias veces, tus tramas variarían bastante. Ahora llame a coinPlot nuevamente, esta vez con 10000 como argumento.
+
+coinPlot(10000)
 
 #¿Ver la diferencia? ¡Asintóticas en acción! La línea se acerca a su asíntota de .5. Esta es la probabilidad que espera, ya que lo que estamos tramando, la suma / número acumulativo de lanzamientos, representa la probabilidad de que la moneda caiga en la cara. Como sabemos, esto es .5.
 
@@ -123,7 +126,7 @@ qnorm(0.95)
 
 #Con la fórmula p '+/-qnorm(.975)*sqrt(p'(1-p')/100), use los valores p' y n de arriba y la construcción R p '+ c (-1,1 ) ... para manejar la parte más / menos de la fórmula. Debería ver límites similares a los que acaba de estimar.
 
-# .6 + c(-1,1)*qnorm(.975)*sqrt(.6*.4/100)
+.6 + c(-1,1)*qnorm(.975)*sqrt(.6*.4/100)
 
 
 #Como alternativa a este intervalo de Wald, también podemos usar la función R binom.test con los parámetros 60 y 100 y dejar que todos los demás sean predeterminados. Esta función "realiza una prueba exacta de una hipótesis nula simple sobre la probabilidad de éxito en un experimento de Bernoulli". (Esto significa que garantiza las coberturas, utiliza muchos cálculos y no se basa en el CLT). Esta función devuelve mucha información, pero todo lo que queremos ahora son los valores del intervalo de confianza que devuelve. Use la construcción R x $ conf.int para encontrarlos ahora.
