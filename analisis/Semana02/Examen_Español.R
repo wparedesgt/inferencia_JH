@@ -9,11 +9,8 @@
 
 #Suponga que las presiones sanguíneas diastólicas (PAD) para los hombres de 35 a 44 años normalmente se distribuyen con una media de 80 (mm Hg) y una desviación estándar de 10. Acerca de cuál es la probabilidad de que una persona aleatoria de 35 a 44 años tenga un PAD menor de 70?
 
-n <- seq(35:44)
-x <- 70
-X <- 80
-sd <- 10
 
+#32%
 
 
 
@@ -62,6 +59,7 @@ pbinom(4, size = 5, prob = .50)
 #El índice de alteración respiratoria (IDR), una medida de la alteración del sueño, para una población específica tiene una media de 15 (eventos de sueño por hora) y una desviación estándar de 10. Normalmente no se distribuyen. ¿Da su mejor estimación de la probabilidad de que una muestra de IDR media de 100 personas sea entre 14 y 16 eventos por hora?
 
 
+#68%
 
 #95% 68% 34% 47.5%
 
@@ -70,7 +68,11 @@ pbinom(4, size = 5, prob = .50)
 
 #Considere una densidad uniforme estándar. La media de esta densidad es de .5 y la varianza es de 1/12. Si tomas muestras de 1,000 observaciones de esta distribución y tomas la media de la muestra, ¿qué valor esperarías que esté cerca?
 
+#0.5
+
+
 #0.5 0.25 0.10 0.75
+
 
 
 
