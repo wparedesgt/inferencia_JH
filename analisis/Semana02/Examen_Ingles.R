@@ -105,7 +105,7 @@ Consider a standard uniform density. The mean for this density is .5 and the var
 8.Pregunta 8
 The number of people showing up at a bus stop is assumed to be
 
-Poisson with a mean of 5 5 people per hour. You watch the bus
+Poisson with a mean of 5 people per hour. You watch the bus
 
 stop for 3 hours. About what's the probability of viewing 10 or fewer people?
   
