@@ -2,6 +2,8 @@
 
 library(swirl)
 
+#Cualquier Cosa
+
 #En esta lección, como su nombre indica, discutiremos los valores p que no tienen nada que ver con las pruebas urológicas. En cambio, son la medida más común de significación estadística.
 
 #Sin embargo, debido a que son populares, se usan mucho y, a menudo, se usan mal o se malinterpretan. 
