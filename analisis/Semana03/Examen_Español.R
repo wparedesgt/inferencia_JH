@@ -67,7 +67,7 @@
 
 #[1,25, 2,75] NO
 
-#[-2,75, -1,25]
+#[-2,75, -1,25] #Respuesta
 
 #Pregunta 5
 
@@ -86,11 +86,11 @@
 
 #¿Qué sugiere el intervalo de confianza del grupo independiente del 95% con variaciones desiguales con respecto a esta hipótesis? (Debido a que hay tantas observaciones por grupo, solo use el cuantil Z en lugar de la T.)
 
-#el intervalo está completamente por encima de cero. El nuevo sistema no parece ser efectivo.
+#el intervalo está completamente por encima de cero. El nuevo sistema no parece ser efectivo.#NO
 
 #el intervalo contiene 0. El nuevo sistema parece ser efectivo.#NO
 
-#el intervalo está completamente por encima de cero. El nuevo sistema parece ser efectivo.#NO
+#el intervalo está completamente por encima de cero. El nuevo sistema parece ser efectivo.#SI
 
 #el intervalo contiene 0. No hay evidencia que sugiera que el nuevo sistema sea efectivo. #NO
 
