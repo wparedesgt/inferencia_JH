@@ -94,3 +94,222 @@ swirl()
 #3: Tipo III
 #4: tipo I
 
+
+#Otro nombre para un error de Tipo II es Falso negativo, ya que reclama falsamente un resultado no significativo (negativo).
+
+
+#"Una rosa con cualquier otro nombre, ¿verdad? Considere la fracción V/R.
+
+#La R observada representa el número de resultados de prueba declarados significativos. Estos son 'descubrimientos', algo diferente del status quo. 
+
+#V es el número de aquellos declarados falsamente significativos, por lo que V/R es la proporción de descubrimientos FALSOS. 
+
+#Dado que V es una variable aleatoria (es decir, desconocida hasta que hacemos un experimento) llamamos al valor esperado de la relación, E(V/R), la tasa de descubrimiento falso (FDR).
+
+
+#Una rosa con cualquier otro nombre, ¿verdad? ¿Qué tal la fracción V/m_0? 
+
+#En el gráfico, m_0 representa el número de H_0 verdaderos y m_0 es desconocido. 
+
+#V es el número de aquellos declarados falsamente significativos, por lo que V/m_0 es la relación de FALSOS positivos. 
+
+#Dado que V es una variable aleatoria (es decir, desconocida hasta que hacemos un experimento) llamamos al valor esperado de la relación, E (V/m_0), la tasa FALSO POSITIVO.
+
+#Otro buen nombre para la tasa de falsos positivos sería
+
+#1: Error de Tipo II
+#2: una rosa
+#3: una espina
+#4: false alarm rate  ###
+
+#La tasa de falsos positivos estaría estrechamente relacionada con
+
+#1: la tasa de error Tipo I ##
+#2: una rosa espinosa
+#3: la tasa de error Tipo II 
+
+
+#Llamamos a la probabilidad de al menos un falso positivo, Pr(V>=1), the Family Wise Error Rate(FWER).
+
+#Entonces, ¿cómo controlamos la tasa de falsos positivos?
+
+#Supongamos que somos realmente inteligentes, calcule nuestros valores p correctamente y declare todas las pruebas con p <alfa como significativas. 
+
+#Esto significa que nuestra tasa de falsos positivos es como máximo alfa, en promedio.
+
+#Supongamos que realizamos 10,000 pruebas y alfa = .05. ¿Cuántos falsos positivos esperamos en promedio?
+  
+#1: 50
+#2: 50000
+#3: 5000
+#4: 500  ##
+
+#¡Lo tienes! 500 falsos positivos parece mucho. ¿Cómo evitamos tantos?
+
+#Podemos intentar controlar la tasa de error familiar (FWER), la probabilidad de al menos un falso positivo, con la corrección de Bonferroni, la corrección de prueba múltiple más antigua.
+
+
+#Es muy sencillo. 
+
+#Hacemos m pruebas y queremos controlar el FWER en el nivel alfa para que Pr(V>=1)<alfa. 
+
+#Simplemente reducimos alfa dramáticamente. 
+
+#Establezca alpha_fwer para que sea alpha/m. 
+
+#Solo llamaremos significativo al resultado de una prueba si su valor p<alpha_fwer.
+
+#Suena bien, ¿verdad? Fácil de calcular ¿Cuál sería un inconveniente con este método?
+  
+#1: requiere demasiadas matemáticas
+#2: pasarán demasiados resultados
+#3: demasiados resultados fallarán  ##
+
+
+#Otra forma de limitar la tasa de falsos positivos es controlar la tasa de falsos descubrimientos (FDR). 
+
+#Recuerde que esto es E(V/R). 
+
+#Esta es la corrección más popular cuando se realizan muchas pruebas. Se utiliza en muchas áreas, como la genómica, la imagen, la astronomía y otras disciplinas de procesamiento de señales.
+
+#Nuevamente, haremos m pruebas pero ahora configuraremos el FDR o E(V/R) en el nivel alfa.
+
+#Calcularemos los valores p como de costumbre y los ordenaremos de menor a mayor, p_1, p_2, ... p_m. 
+
+#Llamaremos significativo a cualquier resultado con p_i<=(alpha*i)/ m. 
+
+#Este es el método Benjamini-Hochberg (BH).
+
+#Esto es equivalente a encontrar la mayor k tal que p_k <= (k * alfa) / m, (para una alfa dada) y luego rechazar todas las hipótesis nulas para i = 1, ..., k.
+
+#Al igual que la corrección de Bonferroni, esto es fácil de calcular y es mucho menos conservador. 
+
+#Puede dejar pasar más falsos positivos y puede comportarse de manera extraña si las pruebas no son independientes.
+
+#Ahora considere este gráfico copiado de las diapositivas. 
+
+#Muestra los valores p para 10 pruebas realizadas en el nivel alfa=.2 y tres líneas de corte. 
+
+#Los valores p se muestran en orden de izquierda a derecha a lo largo del eje x. 
+
+#La línea roja es el umbral para Sin correcciones (los valores de p se comparan con alfa = .2), la línea azul es el umbral de Bonferroni, alfa = .2/10 = .02, y la línea gris muestra la corrección de BH.
+
+#Sin corrección, ¿cuántos resultados se declaran significativos?
+  
+#1: 8
+#2: 6
+#3: 4  ##
+#4: 2
+
+#Con la corrección de Bonferroni, ¿cuántas pruebas se declaran significativas?
+  
+#1: 4
+#2: 2  ##
+#3: 6
+#4: 8
+
+
+#Entonces, el Bonferroni pasó solo la mitad de los resultados que el método Sin corrección (que compara los valores de p con el alfa). Ahora mira la corrección BH. ¿Cuántas pruebas son significativas con esta escala?
+  
+#1: 1
+#2: 7
+#3: 3 ##
+#4: 5
+
+
+#Entonces, la corrección BH que limita el FWER se encuentra entre Sin corrección y Bonferroni. 
+
+#Es más conservador (menos resultados significativos) que la Sin corrección pero menos conservador (resultados más significativos) que el Bonferroni. 
+
+#Tenga en cuenta que con este método el umbral es proporcional a la clasificación de los valores, por lo que tiene una pendiente positiva mientras que los otros dos umbrales son planos.
+
+
+#Observe cómo los métodos Bonferroni y BH ajustaron el umbral (alfa) para rechazar las hipótesis nulas. 
+
+#Otro enfoque correctivo equivalente es ajustar los valores p, de modo que ya no sean valores p clásicos, pero se pueden comparar directamente con el alfa original.
+
+#Supongamos que los valores p son p_1, ..., p_m. 
+
+#Con el método Bonferroni, los ajustaría estableciendo p'_i=max(m*p_i,1) para cada valor p.
+
+#Entonces, si llamas a todos p'_i <alfa significativo, controlarás el FWER.
+
+#Para demostrar algunos de estos conceptos, hemos creado una serie de valores p para usted. 
+
+#Tiene una longitud de 1000 y es el resultado de una regresión lineal realizada en pares x, y normales al azar, por lo que no existe una relación significativa entre las x y las y.
+
+head(pValues)
+
+#Ahora cuente el número de entradas en la matriz que son menores que el valor .05. Use la suma del comando R y la expresión booleana apropiada.
+
+sum(pValues < .05)
+
+#Entonces obtuvimos alrededor de 50 falsos positivos, tal como esperábamos (.05*1000 = 50). 
+
+#La belleza de R es que proporciona una gran cantidad de funciones estadísticas integradas. 
+
+#La función p.adjust es un ejemplo. El primer argumento es la matriz de pValues. Otro argumento es el método de ajuste. Una vez más, use la función R sum y una expresión booleana usando p.adjust con method = "bonferroni" para controlar el FWER.
+
+sum(p.adjust(pValues, method = "bonferroni")< 0.05)
+
+#Por lo tanto, la corrección eliminó todos los falsos positivos que habían pasado la prueba alfa sin corregir.
+
+#Repita el mismo experimento, esta vez usando el método "BH" para controlar el FDR.
+
+sum(p.adjust(pValues, method = "BH")< 0.05)
+
+#Entonces, el método BH también eliminó todos los falsos positivos. 
+
+#Ahora hemos generado otra matriz de 1000 valores de p, esta llamada pValues2. 
+
+#En estos datos, la primera mitad (500 pares x/y) contiene valores "x" y "y" que son aleatorios y la segunda mitad contiene pares "x" y "y" que están relacionados, por lo que ejecutar un modelo de regresión lineal en los 1000 pares debería encontrar algo significativo ( relación no aleatoria).
+
+#También creamos una serie de cadenas de caracteres de 1000 de longitud, trueStatus. 
+
+#Las primeras 500 entradas son "cero" y las últimas "no son cero". Use la función R tail() para ver el final de trueStatus.
+
+tail(trueStatus)
+
+#Una vez más, podemos usar la grandeza de R para contar y tabular por nosotros. 
+
+#Podemos llamar la funcion table()  con dos argumentos, un valor booleano como pValues2 <.05 y la matriz trueStatus. 
+
+#El booleano obviamente tiene dos resultados y cada entrada de trueStatus tiene uno de los dos valores posibles.
+
+#la funcion table()alinea los dos argumentos y cuenta cuántos de cada combinación (VERDADERO, "cero"), (VERDADERO, "no cero"), (FALSO, "cero") y (FALSO, "no cero") aparecen. Pruebalo ahora.
+
+table(pValues2<.05, trueStatus)
+
+#Vemos que sin ninguna corrección, las 500 pruebas verdaderamente significativas (no aleatorias) se identificaron correctamente en la columna "no cero".
+
+#Sin embargo, en la columna cero (las pruebas verdaderamente aleatorias), 24 resultados se marcaron como significativos.
+
+
+#¿Cuál es el porcentaje de falsos positivos en esta prueba?
+
+24/500
+
+
+#Justo como lo esperábamos, alrededor del 5% o 0.05 * 100.
+
+#Ahora ejecute la misma función de tabla, sin embargo, esta vez use la llamada a p.adjust con el método "bonferroni" en la expresión booleana. Esto controlará el FWER.
+
+table(p.adjust(pValues2, method = "bonferroni") < 0.05, trueStatus)
+
+#Dado que el método de corrección de Bonferroni es más conservador que simplemente comparar los valores de p con alfa, todas las pruebas verdaderamente aleatorias se identifican correctamente en la columna cero. En otras palabras, no tenemos falsos positivos. Sin embargo, el umbral se ha ajustado tanto que 23 de los resultados verdaderamente significativos se han identificado erróneamente en la columna no cero.
+
+#Ahora ejecute la misma función de tabla una última vez. Use la llamada a p.adjust con el método "BH" en la expresión booleana. Esto controlará la tasa de descubrimiento falso.
+
+table(p.adjust(pValues2, method = "BH") < 0.05, trueStatus)
+
+
+#Nuevamente, los resultados son un compromiso entre No Corrections y Bonferroni. Todos los resultados significativos se identificaron correctamente en la columna "no cero", pero en la columna aleatoria ("cero") los resultados 13 se identificaron incorrectamente. Estos son los falsos positivos. Esto es aproximadamente la mitad del número de errores en las otras dos ejecuciones.
+
+
+#Aquí hay una gráfica de los dos conjuntos de valores p ajustados, Bonferroni a la izquierda y BH a la derecha. El eje x indica los valores p originales. Para el Bonferroni, (ajustando multiplicando por 1000, el número de pruebas), solo algunos de los valores ajustados están por debajo de 1. Para el BH, los valores ajustados son ligeramente mayores que los valores originales.
+
+
+#Concluiremos diciendo que las pruebas múltiples son un subcampo completo de inferencia estadística.
+
+#Por lo general, una corrección básica de Bonferroni / BH es lo suficientemente buena como para eliminar los falsos positivos, pero si existe una fuerte dependencia entre las pruebas, puede haber problemas. Otro método de corrección a considerar es "BY".
+
