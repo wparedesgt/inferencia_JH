@@ -155,3 +155,109 @@ quantile(meds, c(.025,.975))
 #Otro par de cuantiles cercanos, pero observe que estos cuantiles de las medianas de los padres difieren de los de los hijos.
 
 #Bootstrapping es un tema muy diverso y complicado y acabamos de ver la superficie aquí. La técnica que le mostramos no es paramétrica, es decir, no se basa en ninguna familia parametrizada de distribuciones de probabilidad. Utilizamos solo un conjunto de observaciones que asumimos que son representativas de la población.
+
+#Finalmente, los intervalos de confianza que calculamos podrían no funcionar muy bien debido a sesgos, pero el paquete de arranque R proporciona una solución fácil para este problema.
+
+#Ahora, a las pruebas de permutación, otra herramienta útil utilizada en las comparaciones grupales. Como lo hizo el bootstrapping, las pruebas de permutación muestrean un solo conjunto de datos un billón de veces y calculan una estadística basada en estos muestreos.
+
+
+#Sin embargo, las pruebas de permutación se basan en la idea de intercambiabilidad de etiquetas de grupo. Mide si los resultados son independientes de la identidad del grupo. Nuestras millones de muestras simplemente permutan las etiquetas de grupo asociadas con los resultados. Veremos un ejemplo de esto.
+
+#Aquí hay una imagen del conjunto de datos InsectSprays que contiene recuentos de la cantidad de errores eliminados por seis aerosoles diferentes.
+
+#Usaremos pruebas de permutación para comparar Spray B con Spray C.
+
+dim(InsectSprays)
+
+names(InsectSprays)
+
+
+#Utilizaremos las pruebas de permutación para comparar Spray B con Spray C. Subconjuntos de datos para estos dos aerosoles en un subdato de marco de datos.
+
+#Además, los dos marcos de datos Bdata y Cdata contienen los datos de sus respectivos aerosoles.
+
+range(Bdata$count)
+
+range(Cdata$count)
+
+
+#De los rangos (así como de la imagen), los aerosoles se ven muy diferentes. Pondremos a prueba la hipótesis nula (obviamente falsa) de que sus medias son las mismas.
+
+#Para facilitar el análisis, hemos definido dos matrices para usted, una con los recuentos para los aerosoles B y C. Se llama BCcounts. Míralo ahora.
+
+BCcounts
+
+#La segunda matriz que hemos definido contiene la identificación del aerosol y se llama grupo. Estas dos matrices se alinean entre sí, es decir, las primeras 12 entradas de conteos están asociadas con el aerosol B y las últimas 12 con el aerosol C. Mire el grupo ahora.
+
+group
+
+#También hemos definido para usted una función testStat de una línea que toma dos parámetros, una matriz de conteos y una matriz de identificadores asociados. 
+
+#Supone que todos los recuentos provienen del grupo B o del grupo C. Resta la media de los recuentos del grupo C de la media de los recuentos del grupo B. Escriba testStat sin paréntesis y sin argumentos para ver cómo se define.
+
+testStat
+
+#Ahora establezca una variable obs invocando testStat con los argumentos BCcounts y group y asignando el resultado a obs.
+
+obs <- testStat(BCcounts, group)
+
+#Echa un vistazo a obs ahora.
+
+obs
+
+#Gran diferencia, ¿verdad? Puede verificar esto usando mean en Bdata$count y en Cdata$count y restando este último del primero. 
+
+#De manera equivalente, puede aplicar la mean a Bdata$count-Cdata$count. Haz cualquiera de los dos ahora.
+
+mean(Bdata$count-Cdata$count)
+
+
+#Entonces, mean(Bdata$count)- mean(Cdata$count) es igual a mean(Bdata$count-Cdata$count) porque?
+  
+#1: los datos son especiales
+#2: matemática
+#3: la media es lineal ##
+
+#Ahora aquí es donde la prueba de permutación comienza a involucrar remuestreo. Vamos a probar si la asociación grupal particular de los recuentos afecta o no la diferencia de las medias.
+
+#Mantendremos el mismo conjunto de recuentos, simplemente los etiquetaremos al azar, permutando el conjunto de grupos. R hace que este proceso sea muy fácil. Llamar a la función  sample (que hemos usado varias veces en esta lección) con un argumento, un nombre de matriz, simplemente permutará los elementos de esa matriz.
+
+#llamar sample ajora en el grupo de array.
+
+sample
+
+sample(group)
+
+#Las etiquetas están todas mezcladas ahora. Haremos esta permutación de etiquetas y luego volveremos a calcular la diferencia de las medias de los dos grupos "nuevos" (realmente recién etiquetados).
+
+#Reetiquetaremos y calcularemos la diferencia de medias 10000 veces y almacenaremos las diferencias (de means) en los permisos de la matriz. Esto es lo que parece el código perms <- sapply (1: 10000, function (i) testStat (BCcounts, sample (group))). Pruebalo ahora.
+
+perms <- sapply (1:10000, function(i) 
+testStat (BCcounts, sample (group)))
+
+#Podemos tomar la media de la matriz virtual de la expresión booleana perms> obs. Hacer esto ahora.
+
+mean(perms>obs)
+
+#Entonces, en promedio, 0 de las permutaciones tuvieron una diferencia mayor que la observada. Eso significa que rechazaríamos la hipótesis nula de que las medias de los dos aerosoles eran iguales.
+
+#Aquí hay un histograma de la diferencia de las medias. 
+
+#Parece bastante normal, ¿verdad? Podemos ver que la distribución corre aproximadamente entre -10 y +10 y está centrada alrededor de 0. 
+
+#La línea vertical muestra dónde estaba la diferencia de medias observada y vemos que está bastante lejos de la distribución de las permutaciones muestreadas. Esto significa que la identificación del grupo sí importó y los aerosoles B y C fueron bastante diferentes.
+
+#Aquí está la imagen de los InsectSprays nuevamente. Supongamos que ejecutamos el mismo experimento, esta vez comparando los aerosoles D y E, que se parecen más. Hemos redefinido testStat para observar estos aerosoles y restar la media de la pulverización E de la media de la pulverización D.
+
+#También hemos almacenado los datos D y E en DEcounts y las etiquetas de grupo en group. Ejecute testStat ahora con DEcounts y group.
+
+testStat(DEcounts, group)
+
+#Hemos almacenado este valor, 1.416667, en la variable obs para usted. Ahora ejecute el comando de permutación, con DEcounts. Aquí está, perms <- sapply (1: 10000, function (i) testStat (DEcounts, sample (group)))
+
+
+perms <- sapply(1:10000,function(i)testStat(DEcounts, sample (group)))
+
+
+#Finalmente, podemos trazar el histograma de la distribución de la diferencia de las medias. Vemos que con estos aerosoles la diferencia de medias observada (la línea vertical) está más cerca de la media de las etiquetas permutadas. Esto indica que los aerosoles D y E son bastante similares y no podemos rechazar la hipótesis nula de que las medias eran iguales.
+
